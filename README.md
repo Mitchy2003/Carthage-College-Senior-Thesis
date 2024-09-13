@@ -1,0 +1,468 @@
+# Software Requirements Specification for Bowling Web App
+## Introduction
+- I, Mitchell Berg, am a bowler. I often find myself having issues keeping track of all of my scores, meaning I don't actually have any accurate guess as to what my average score is. This bowling app is the solution. When a Bowler bowls in a league, their average is calculated by the bowling alley's software behind the scenes, and then the score sheet is posted for all of the bowlers to see the updated scores the next time they come back to bowl in that league. Well that's just one league, what if someone is a serious tournament bowler? Tournament Bowlers often bowl at many different bowling alleys in many different locations, on many different oil patterns, and it is of the utmost importantance for them to keep track of all of their scoring because these tournaments may have large cash prizes for those who place highest. No matter what level of bowler the user is, this app will be useful for keeping scores up, and their game strong!
+## Purpose
+- The purpose of this document is to serve as a guide to designers, developers, and testers who are responsible for the engineering of the Bowling Web App project. It should give the engineers all of the information necessary to design, develop, and test the software.
+## Scope
+- This document contains a complete descirption of the functionality of the Bowling Web App project solution. It consists of use cases, functional requirements, and non-functional requirements, which, taken together form a complete description of the software.
+## System Overview
+- The Bowling Web App will be a score tracking application that allows bowlers to stay on top of their game, no matter where they are bowling, what bowling balls they are using, the way the oil is laid out onto the lane, etc. The Bowler will be able to create a bowler profile for themselves which they can log into when they first navigate to the site.
+## Software Requirements Specification Definitions
+- UC - Use Case
+- FR - Functional Requirement
+- NR - Non-Functional Requirement
+## Use Cases
+### UC-1: Create Bowler Profile
+- Summary
+    - The user may create a bowler profile to use the bowling web app, that the user can specify if it is a public profile or a private profile.
+- Rationale
+    - The user can use this bowler profile to stay on top of their bowling game by looking at statistics such as, their last game, their average score, and the score needed to maintain their average score.
+- Users
+    - Any user may create a bowler profile.
+- Preconditions
+    - The user must be navigated to the login page. (index.php)
+- Basic Course of Events
+    - Once on the login page, the user will click on the link "Create Profile" to create a bowler profile. They will then be navigated to the signup page, where they must input an email, password, and password confirmation, once complete the user will click the "Done" button. If the password match and the email is valid, then the user will be signed up, in, and navigated to the create profile page, which will prompt the user to input information about their bowling style. The user may also create a bio for their profile to give some information about themselves.
+        - Average Ball Speed
+        - Average RPM
+        - Which Hand used to Bowl
+        - Public or Private Profile
+        - Bio
+- Alternative Paths
+    - Email is invalid: The site will clear the textfields, and tell the user the email that was given was invalid.
+    - Password does not meet requirements: The password must be between 8 and 30 characters in length, contain at least one uppercase character, one lowercase character, and one special character. The site will clear the textfields, and tell the user the password given does not meet the requirements.
+    - Passwords do not match: The site will clear the textfields, and tell the user that the password textfields did not match.
+- Post Conditions
+    - The user will have created a bowler profile associated with the email given.
+### UC-2: Sign into Bowler Profile
+- Summary
+    - The user will be able to sign into a bowler profile, they must sign in with the associated email address and the correct password.
+- Rationale
+    - The user will be able to begin a game, and keep track of their scores once signed in, or look at their past game(s).
+- Users
+    - Users who have a bowler profile in the database.
+- Preconditions
+    - The user must have created a bowler profile to sign in, and they must be on the login page.
+- Basic Course of Events
+    - The user will enter their email and password, and then click the sign in button.
+- Alternative Paths
+    - Invalid Email: The site will clear the textfields, and tell the user the email they entered was invalid, or did not match an email in the records.
+    - Incorrect Password: The site will clear the textfields, and tell the user the password entered was incorrect.
+- Post Conditions
+    - The user will be navigated to the main page and signed into their bowler profile.
+### UC-3: Begin Game
+- Summary
+    - The user may begin a game by clicking "Begin Game" on the main page. 
+- Rationale
+    - The user will be able to begin a game, where they can input their scores after they throw a ball down the lane. When inputting, the user will be given the option of if they would like to add a comment to tell themselves something about their shot, or adjustments they should make for their next shot.
+- Users
+    - Any user signed into a bowler profile.
+- Preconditions
+    - The user must be signed into a bowler profile, and not currently in a game.
+- Basic Course of Events
+    - The user will click the "Begin Game" button, where they will be prompted to enter information, such as the name of the bowling alley, the oil pattern and what ball they are going to be throwing, at least for the beginning of the game. (Remember the user might change bowling balls during the game as well.)
+- Alternative Paths
+    - N/A
+- Post Conditions
+    - A game will be started, and associated with the user that began that game.
+### UC-4: Add Score
+- Summary
+    - After the user has thrown a ball down the lane, they can input the amount of pins they knocked down, if the user knocked down all ten pins in one throw the game will move to the next frame, if two throws are used in the frame the game will move to the next frame, with the exception of the 10th frame.
+- Rationale
+    - The user will be able to keep track of their information shot by shot, so they may adjust on the fly during a game.
+- Users
+    - Any user signed into a bowler profile.
+- Preconditions
+    - The user must be signed into a bowler profile and within a game.
+- Basic Course of Events
+    - The user will click the button of the value they scored after  they throw the shot, they may add a comment about the shot, then click "Confirm" to add the score to the game.
+- Alternative Paths
+    - N/A
+- Post Conditions
+    - The shot will be recorded, with the comment written by the user.
+### UC-5: Begin Tournament
+- Summary
+    - The user may begin a tournament block by specifying the amount of games they are going to play, a tournament block scores games compared to a score of 200. For example, if a user throws a 185 game, their total score is 185, but their tournament score would be -15.
+- Rationale
+    - The user can keep easy track of their score during the tournament, without having to go to the physical tournament board in the bowling alley.
+- Users
+    - Any user signed into a bowler profile.
+- Preconditions
+    - The user must be signed into a bowler profile.
+- Basic Course of Events
+    - The user will click the "Begin Tournament" button where they will then be prompted asking for the amount of games the user will play in the tournament block. (8 games usually) Then they will enter a game.
+- Alternative Paths
+    - N/A
+- Post Conditions
+    - The user will have begun a tournament block where the scoring will be calculated both as a total score and a tournament score.
+### UC-6: End Game
+- Summary
+    - Once the user finishes the tenth frame in a game, the game score will be recorded, and the user will be asked if they would like to begin a new game, or exit to the main page.
+- Rationale
+    - The user will be able to record their game to their profile statistics.
+- Users
+    - Any user signed into a bowler profile who just finished a full game.
+- Preconditions
+    - The user must be signed into a bowler profile.
+    - The user must finish all ten frames of a game.
+- Basic Course of Events
+    - Once the user finishes the tenth frame of a game, two buttons will appear, one saying "New Game", the other saying "Exit". If the "New Game" button is pressed, the frames will clear, the score of the previous game is saved and added to the records associated with the bowler profile the user is signed in as.
+- Alternative Paths
+    - Within Tournament Block: The user will not be given the option to exit to the main page if it is not the final game within the tournament block. Tournament score is calculated and displayed to the user in addition to the total score of the block, and how close they are to a 200 average.
+- Post Conditions
+    - The score of the finished game is added to the database, and either a new game starts or the user is navigated back to the main page.
+### UC-7: End Tournament Block
+- Summary
+    - Once the user finishes a tournament block, their final scores will be displayed to them and the tournament block will be recorded as a whole.
+- Rationale
+    - The user will be able to record their tournament block to their profile statistics.
+- Users
+    - Any user signed into a bowler profile within a tournament block.
+- Preconditions
+    - The user must be signed into a bowler profile.
+    - The user must finish all of the games in the tournament block.
+- Basic Course of Events
+    - Once the user finishes the tenth frame of the last game within the tournament block, the scores of all of the games will be added together and displayed to the user, in addition to the tournament score, for the entire tournament block.
+- Alternative Paths
+    - N/A
+- Post Conditions
+    - The score of all of the games are added to the database, and the user will be navigated back to the main page.
+### UC-8: Update Profile
+- Summary
+    - The user may update their profile after creating it.
+- Rationale
+    - The user will have the ability to add or remove bowling balls from their arsenal, in addition to updating their bio.
+- Users
+    - Any user signed into a Bowler Profile.
+- Preconditions
+    - The user must be signed into an existing bowler profile.
+- Basic Course of Events
+    - The user will click the Bowler Profile button, then navigated to the profile page, where there is a button to edit the Bowler Profile. The user will then be prompted with an option to update their arsenal or update their bio, once finished, the user will click "Save" and then be navigated back to the main page.
+- Alternative Paths
+    - N/A
+- Post Conditions
+    - The bowler profile will be updated with the new information.
+## Functional Requirements
+### FR-1: Database Storage
+- Summary
+    - The software must connect to a database to record, bowler scores, and profiles.
+- Rationale
+    - Without access to a database or some sort of data storage solution, the web app will not be able to keep track of scores or bowler profiles.
+- Requirements
+    - The software must have a secure connection to the database.
+    - The database must have a 'profiles', 'bowling balls', and 'scores' tables.
+- References
+    - UC-1, UC-2, UC-6, UC-7, UC-8
+### FR-2: Server
+- Summary
+    - The software must be able to run on multiple machines.
+- Rationale
+    - The server is necessary to ensure secure connections to the database, and to allow multiple machines to connect at the same time.
+- Requirements
+    - The server must be operational, and able to connect to the database.
+- References
+    - UC-1, UC-2, UC-3, UC-4, UC-5, UC-6, UC-7, UC-8, FR-1
+### FR-3: Query by Bowler Profile
+- Summary
+    - The software can grab all of the information from one bowler profile.
+- Rationale
+    - The software will be able to display accurate information to the bowler profile.
+- Requirements
+    - The software must be able to query all of the information about a single bowler profile.
+- References
+    - UC-8
+## Non-Functional Requirements
+### NR-1: Standardized Styling (CSS)
+- Summary
+    - The web app must have the same styling, no matter what page the user navigates to.
+- Rationale
+    - The web app will look complete and the same, if the styling is also the same.
+- Requirements
+    - There must be a CSS file to standardize styling.
+- References
+    - N/A
+## Bowling Definitions
+The list may also be found <a href= "https://www.pba.com/about/bowling-lingo">here</a>. (The Professional Bowlers Association)
+- ABC
+    - The American Bowling Congress (ABC) was founded in 1985 and was dissolved in 2004. It was replaced officially on January 1, 2005 by the United States Bowling Congress as an organization to combine the efforts of the ABC, WIBC, YABA, and USA Bowling.
+- Action
+    1. Spin on the ball and the movement of the pins caused by that spin. A relatively slow ball with a lot of action can be much more effective than a very fast ball with little action.
+    2. Pins flying and mixing, ending with a good make-able leave. (Easy to spare)
+    3. Bowling for money, usually one-on-one.
+- Address
+    - The Bowlers stance before beginning the approach.
+- Adjustment
+    - The changing of part of your game to be more competitve on the particular lane and/or lane condition you are bowling. This can mean an alignment change, equipment change, or even changes in your physical or mental game; some are subtle, other more pronounced.
+        - Note* This is why I would like to use comments to keep track of adjustments. How else is one supposed to track of a change in somebody's mental game?
+- Approach
+    1. The space extending from the foul line used to make the steps and delivery.
+    2. How the bowler gets to the foul line.
+- Area
+    - A player has "area" if they are able to hit a larger number of boards and still get the ball back to the pocket. Modenr high schoring environments can often give a player a 5-8 board area.
+- Armswing
+    - The path your arm takes from your pushaway to release. Generally it is desirable to have your armswing in a consistent plane of movement.
+- Arrows
+    - The triangles embedded on the lane used in aiming the throw.
+- Axis
+    - Generally the reference is to the positive axis point (PAP), which is the point on the ball where the bowlers release creates the initial axis of rotation.
+- Axis Tilt
+    - Ranging from 0 to 90 degrees, this is determined by the direction of your axis is facing when you release the ball. 0 is parallel with the gutters, 90 is parallel to the foul line. The less axis tilt you have, the sooner the ball will go into a roll. Higher degrees of axis tilt promotes skid.
+- Baby Split
+    - The 2-7 or 3-10 split. Easier to pick up compared to a regular split.
+- Back Ends
+    - Usually refers to the far end portion of the lane where the most hook can occur. If the back ends are very dry, the ball will continue to hook with power for most players; if the back ends are tight, most players will see more deflection in the pocket and fewer strikes.
+- Backup Ball
+    - A ball that curves left to right for a right-handed bowler or right to left for a left-handed bowler. Professionals normally do not throw backup balls.
+- Bad Rack
+    - A full set of pins that appears to have one or more not properly positioned; generally undesirable.
+- Bagger (Such as Five Bagger)
+    - A string of strikes; i.e, five bagger is five in a row.
+- Baker Game/System
+    - A method of team play in which all five players bowl together to make one game; player #1 bowls frames 1 and 6, player #2 bowls frames 2 and 7 etc. Most Baker matches are two games, total pins.
+- Balance (As Applied to a ball)
+    - The weight of a bowling ball is not always evenly distributed in the sphere. USBC rules allow a ball to vary 3 ounces from the drilled top half to bottom half of a ball, and one ounce from the left to right side. Before resin balls, these weights were used to subtly change the roll pattern of a ball. A ball that has negative balances tends to be influenced to turn away from the pins; a ball with positive balance will be influenced to turn towards the pins.
+- Balance (As applied to a player)
+    - A player is in balance if, at the point of release, they are able to compare their follow through without falling off to one side; generally means that the release and slide are simultaneous.
+- Balance Hole (No longer legal by USBC rules)
+    - As a general rule, if you take a bowling ball and place the label in front of you and then exactly dissect the ball into two equal halves, a right side and a left side, the gross weight of each half would be the same. However, if you dissect the ball off center, a greater portion of the weight block will be on one side of the ball, possibly making that half of the ball too heavy vis-a-vis the other half; also modenr high tech balls and their asymmetrical cores can be drilled in such a manner as to be in violation of the maximum tolerances allowed by the USBC for side to side weight (which is a one ounce differential); to get the ball back to legal complaince an extra, non-gripping hole may be drilled to remove the excess weight. This extra hole is the balance hole. The balance hole can also be used to increase or decrease a balls reactoin and/op to fine tune a more subtle change in ball reaction.
+- Ball Return
+    - The physical part of the eqipument upon which the ball sits after being sent back to you after a delivery.
+- Ball Spinner
+    - A machine that is used to spin a ball in a container so that the user can apply ball polish or sand the ball down more quickly.
+- Ball Track
+    1. The area of the lane where most balls are thrown;
+    2. The area on a ball where the ball rolls; most balls will show scratches and wear in this area after several games.
+- Beak
+    - The nose; the center of the head pin.
+- Bed Posts
+    - The 7-10 split.
+- Belly The Ball
+    - Describes the type of shot where a player stands inside and tosses it to the outside in the hopes it returns to the pocket for a strike.
+- Big Four
+    The 4-6-7-10 split.
+- Blind Score
+    - When a league bowler is "blind" and can't find their way to the league that evening, the bowlers's average is simply used (as if they just bowled that score) when figuring the team's total for each game.
+- Blow
+    A miss or an error failing to convert a spare other than a split.
+- Bowl Out
+    - The practice of allowing a team player to complete their game by bowling more than their scheduled turn at one time; allowed as a courtesy to a player that has other time commitments; league and tournament rules can prohibit the practice.
+- Board
+    - A lane consists of 39 strips of wood, each called boardsp; they are usually numbered by the player and used as targeting terms; i.e., I was throwing the 5th board; in synthetic lanes, there are no boards as such, but usually the synthetic overlay has a pattern that resembles natural wood lanes.
+- Body English
+    - Movements and contortions of the body intended to steer the bal as it travels down the lane.
+- Boomer
+    - A big hooking ball, a person that throws a big hooking ball.
+- Bottom Weight
+    - The weight of a bowling ball is not always evenly distributed within the sphere. USBC rules allow a ball to vary three ounces from thee drilled top half to bottom half of a ball, and one ounce from the left to right side. Before resin balls, these weights were used to subtly change the roll pattern of a ball. A ball that had higher top weight would tend to go longer before hooking; a ball with bottom weight would tend to roll earlier. Although still used in ball drilling layouts, it is less important with the modern ball.
+- Break Point
+    - The portion on the lane where the thrown ball begins to hook back to the pocket. Finding the proper breakpoint (called "breakpoint management") is critical to the modern game. A ball that hooks too early or one that hooks too late will make it very difficult for a player to be consistent. Breakpoints can be adjusted by making changes in alignment, target, ball, ball surface and ball speed.
+- Brooklyn
+    - Refers to a ball that crosses over to the other side of the head pin opposite the side it was thrown (i.e. a Brooklyn strike hit the 1-2 pocket for a right hander)
+- Bucket
+    - A diamond shaped, four-pin cluster, e.g., the 2-4-5-8 or 1-2-3-5. Some claim it to be the 2-4-5-8 for right handers, the 3-5-6-9 for a left hander.
+- Carrydown
+    - The oil conditioner on the lane odes not soak into the boards, it sits on top. As balls are thrown, the oil is subtly moved... it may be pushed left and right, or, it may be moved farther down the lane (carried down). Usually, not always, a house with a lot of carrydown will not allow a ball to hook as much on the back ends and score will be lower. In some houses and oil patterns, the initial pattern is too much over/under and carry increases as the carrydown effect takes place. Carrydown is invisible to bowlers and cannot be seen. A top professional can anticipate carrydown and make adjustments accordingly.
+- Center of Gravity (CG)
+    - The heaviest part of a bowling ball. The "CG" is signified by a dye mark places on the ball by the manufacturer designating the center of the weight mass relative to the top of the ball.
+- Channel (Also Gutter)
+    - Semicircular grooves or drop-off area on each side of the bowling surface.
+- Chop
+    - To knock down one pin of a spare leave, while the pin next to or behind it remains standing.
+- Clean Game
+    - A game without any open frames.
+- Closed Pocket
+    - A full rack of pins set up for your strike ball such that the head pin is a tad off spot towards your ball hand; i.e., to the right for a right handed player; closed pockets can give unpredictable results, often negative.
+- Conditioner
+    - Another name for lane oil. All lanes need some type of protective coating to prevent burn marks in the heads from the force of the thrown balls. In the "old days" lane conditioner was used primarly as a protective measure; today, under the System of Bowling, come centers legeally use the lane conditioner to assist in scoring and guiding a ball to the pocket. The area of a lane that is heavily conditioned will retard the hook, and if there is heavy conditioner in the center/pocket area of the lane it can assist the ball into the pocket.
+- Conventional Grip
+    - A type of ball drilling where the fingers are place up to the second joint. Not used by many higher skilled players as it is much harder to get a hook on this type of drilling, although, it may assist accuracy in some players.
+- Count
+    - Usually the numebr of pins kocked down in the next frame that apply to a spare or strike.
+- Coverstock
+    - The material that makes up the outer shell of the ball; the hardness, texture, and shine of a bowling ball. It is generally defined as "Agressive", meaning it is made of a high friction material that is prone to large hook or flip when it encounters dry boards; or, "Medium" which displays less tendency to hook; and, "Mild/Mellow" which is the lowest riction material and the least sensitive to dry lanes.
+- Deuce
+    - A game of 200 or more.
+- Dots
+    1. Series of seven spots on the lanes past the foul lines but before the arrows; used to assist in targeting and alignment; also the same spots on the approach normally used to align your feet in your initial stance.
+    2. Markers on the runway that guide the bowler's approach.
+- Double Wood
+    - Any two pins such that one is directly behind the other, i.e., the 2-8; 3-9; 1-5.
+- Down and In
+    - Refers to a line thatr is more direct and parallel to the boards; opposite of bellying the ball.
+- Dressing
+    - The lane conditioner; the act of applying lane conditioner.
+- Drift
+    The nuber of boards that you vary from straight in your approach to the foul line. For example, if you place the inside edge of your slide foot on board 15 on the approach, but your inside edge slides on the 12 board at the foul line, you have a three board inward drift.
+- Dutch 200
+    - A game of exactly 200 made by alternating strikes and spares throughout the entire game.
+- Early Timing
+    - Releasing the ball before the sliding foot completes its slide; usually results in less hook and a weaker ball as the player dows not have the proper balance and leverage to hit up on the ball.
+- Entry Angle
+    - The angle reactive to the pocket that the ball enters the pocket. As a rule, increased angle means increased strikes (hence the preference for a ball that hooks a lot, or for clean back ends.)
+- Fall Back Shot
+    - A type of shot that starts to the opposite side of the normal pocket and then fades back into the pocket; sometimes used on very oily lane conditions.
+- Fast Eight
+    - Decribes an apparent good pocket hit that gets just eight (8) pins; typically the right-handed players will leave the 4-7 spare and the left-handed players the 6-10; usually the ball is a tad high when this happens.
+- Fifth Arrow
+    - The 25th board from the right (right hand player). The fifth arrow is normally placed by bowlers who have an "Out of Bounds" condition.
+- Finger Grips
+    - Inserts that are placed in the finger and/or thumb holes to allow a better grip and generation of more spin, later release and more tilt.
+- Finger Weight
+    - The drilling of a ball so that the finger holes are closer to the ball's label than is the thumbhole; it is a form of positive weight.
+- Fingertip
+    - A type of grip in which the fingers are inserted only as far as the first joint, alloowing much more spin.
+- First Arrow
+    - The farthest to the right (for a right handed player); located on the 5th board.
+- Flare (Track Flare)
+    - The migration of a ball track from the bowler's initial axis- the axis upon release to the final axis-the axis at the moment of impact with the pins.
+- Flat
+    - A ball that deflects too much; ineffective ball; few revolutions; if a ball comes into the pocket on an apparent good hit but leaves a weak hit such as the 5-7 or 8-10 split, it is said to have hit "flat."
+- Flat Gutter
+    - The normal gutter is shaped somewhat oval so that the ball can roll purely and cleanly to the pit area if it goes into the gutter early... the channel effect; however, at the end of the lanes by the pins, the gutters are flat, not ovaled. The height (from the pin deck to the bottom of the flat gutters) is regulated by the USBC as if the flat gutters are too high, they allow much better pinfall as pins will deflect off the sideboards and bounce back onto the lane much easier resulting in more pin action.
+- Flush
+    - Being solid in the pocket.
+- Follow Through
+    - What your arm does after the ball leaves your hand. It is generally desirable to follow through towards your target and upward as this promotes more accuracy.
+- Foul
+    - Crossing or touching the foul line at delivery. It's penalized by a count of zero pins. If the foul occurs on the first ball of the frame, the bowler gets a second shot at a new rack.
+- Foul Line
+    1. The line that separates the approach area from the beginning of the playing surface.
+    2. A line, usually red, between the approach and the beginning of the lane, 60 feet from the head pin.
+- Foundation Frame
+    - The 9th frame.
+- Full Roller
+    - A ball that rolls over its full circumference. The track of the ball cuts betwen the thumb and finger holes. Although once very populer, now it is rarely used because it lacks the carrying power of a semi-rolled bal due to the fact that it generally cannot create the increased entry angles that are helful to carrying your strikes, particularly the off-hits.
+- Greek Church
+    1. A spit leave of five pins similar to the 4-6-7-9-10 so called because it reminds people of an old cathedral type church with spires, etc.
+    2. Any split on which there are three pins on one side of the lane and two on the other.
+- Half Ten
+    - The description of a 10-pin that was left by a ball in the pocket and the 6-pin laying down in front of the 10-pin in a half hearted manner; same as "weak 10."
+- Handicap
+    - An adjustment in scores in order to equalize competition by adding pins on a predetemined basis.
+- Heads
+    - The part of the first portion of the lane that is usually hard maple (wood lanes) to absorb the impact of the thrown balls, generally the first 20 feet of the wood lane.
+- Head Pin
+    - The 1 pin.
+- High
+    - A ball that hits more to the center of the head pin, often leaving a split.
+- High Hit
+    1. A solid hit on a pin due to contact near its front center.
+    2. Hitting too much head pin on a strike attempt
+- House
+    - The bowling establishment or building.
+- Jersey Side/Hit
+    - A ball that hits on the opposite side of the player's normal pocket; i.e., a Jersey for a right handed player would hit on the 1-2 pocket; usually refers to getting a strike in the "wrong" pocket. Called a "Brooklyn" in most locations of the country.
+- Kegler
+    - German word for bowler.
+- Kickbacks
+    - The side boards around the pis that divide lanes, where pins frequently rebound or "kick" back onto the lane aiding in pin action.
+- King Pin
+    - The 5-Pin. It is a key pin to produce a strike: a light pocket hit or deflected hit leaves this pin standing.
+- League
+    - Organized Competition on a weekly basis for team play.
+- Leave
+    - Pins left standing after the first ball has been rolled.
+- Light Hit
+    - A ball hitting the side of the pin deflecting it sideways.
+- Lily
+    - The 5-7-10 split; also known as the "sour apple."
+- Loft
+    - The distance the ball travels betwen the time of release and the time it hits the lane.
+- Long Oil
+    - Condition in which the lane conditioner is applied from the foul line farther than normal. There is no magic standard, but 35-40 feet or more of application was considered long oil. It can be a more difficult condition in that there will be less back end to generate pocket entry angle. Long Oil in today's environment would be considered anything longer than 40 feet of oil. 35 is now considred short oil.
+- Maple
+    - The hardwood used for the head portion of the lanes (foul line to the arrows). Wood lanes are mostly obsolete on the PBA Tour.
+- Mass Bias
+    - Mass bias in a bowling ball occurs when the weight block or portion of a weight block is more dominant in one direction inside of a bowling ball.
+- Match Play
+    - A type of competition in which two players compete against one another, rather than against the field as a whole. Typically, the winner of a match advances to the next round for another match.
+- Messenger 
+    - The name given to the pin that rolls across the pindeck into a pin or pins to either get a strike or breakup a split.
+- Minus
+    - In competitve play, the amount of pins (including bonus, if any) that a player is scoring under a 200 average. A player that shoots 1,534 for eight (8) games is "minus" 66.
+- Negative Weight
+    - Weight on a ball that tends to hold back the hook and/or to get the ball into a roll earlier; bottom weight, negative side weight and thumb weight are considered static weights that can be drilled into a ball.
+- No-Tap
+    - A type of competition where nine (9) pins on the first ball i9s scored as a strike; in some instances there are 8-pin no-tap events; in those eight (8) pins or more on the first ball counts as a strike.
+- Open Frame
+    - A frame having neither a spare or strike.
+- Open Bowling
+    - Bowling for the fun of it, as opposed to competiting in league or tournament play.
+- Out of Bounds
+    - An area from which the ball can't get to the pocket with its usual break. If, for example, a right-handed bowler delivers the ball from too far to the right, it is said to be out of bounds.
+- Over
+    - To a professional bowler, the number of pins above 200. This a schore of 224 is "24 over."
+- PAP (Positive Axis Point)
+    - The point on the ball that is equidistant from all points of the release ball track.
+- Par
+    - To a professional bowler, a 200 game.
+- Perfect Game
+    - A game of all strikes--twelve strikes in a row--resulting in bowling's maximum score of 300.
+- Picket Fence
+    - The 1-2-4-7 or 1-3-6-10 spares.
+- Pin Deck
+    - Area on which the pins are set.
+- Pin Placement
+    - Out or in. A drilling term that is relative to a bowler's track designed purposely for creating more ball dynamics. A Pin-in-ball (when the pin is located within two inches of the Center of Gravity) is an excellent choice for control and less hook; a Pin-out ball usually can be made to hook more and flip more dramatically than pin-in balls; they often give the driller more options.
+- Pit
+    - The area of the lane behind the pin deck. The area at the end of the lane.
+- Pitch
+    - Angle at which the holes in a ball are drilled.
+- Plus
+    - In competitive play, the amount of pins (including bonus if any) that a player is scoring over a 200 average; a player shoots 1,734 for eight (8) games is "plus" 134.
+- Pocket
+    - The desirable location for the ball to hit the pins to maximize strike potential. Generally the area between the 1-3 pins (right-hand player) or the 1-2 pins (left-hand player). This is the target for the first ball in a frame.
+- Positive Weight
+    - Weight on a ball that tends to enhance the hook and/or to get the ball into a roll later down the lane; top weight, positive side weight and finger weight are considered positive weights. These are considered static weights that can be drilled into a ball.
+- Punch Out
+    - To finish with consecutive strikes, from any frame on.
+- Pushaway
+    - The pushing out (forward) of the ball to begin the swing (coincides with first step of four-step apporoach.)
+- Radius of Gyration (RG)
+    - Identifies how fast a ball begins to rotate once it leaves the bowler's hand.
+- Range Finders
+    - Markers in the lane that help the bowler determine the target line. There are two sets of such markers: 10 dots located seven feet past the foul line and seven arrows arranged in a triangle beginning 16 feet beyond the foul line. There are also range finders at 35 and 40 feet down the lane per USBC rules.
+- Re-Rack
+    - Resetting the pins to a new full rack due to a percieved mis-spotting of one or more pins.
+- Revs/Revolutions
+    - The numebr of times the ball rolls over its circumference from when it is released until it contacts the pins; as a rule, more is better.
+- Roll Out
+    - A ball that loses its side rotation before hitting the pins; the hook action stops at that point and the ball straightens out.
+- Sandbagging
+    - Deliberatly keeping an average low so that person can recieve a bigger handicap.
+- Scratch
+    - The actual score the bowler makes; it is without any handicap adjustment (to equalize competition)
+- Six Pack
+    - Six strikes in a row.
+- Skid
+    - What the ball does when it first hits the lane surface; all balls nedd to skid before hooking.
+- Sleeper
+    - A rear pin that is not easliy seen because of a pin directly in front of it. (Ex.: 2-8, 3-9, 1-5)
+- Sour Apple
+    - A weak hit that leaves the 5-7, 5-10 or 5-7-10 split; also, the 5-7-10 split itself (Also known as the "lily.")
+- Span
+    - On a bowling ball, the distance between the thumb and finger holes.
+- Spare
+    - To knock down the remaining pins left after the first throw with the second throw.
+- Split
+    - Various combination of pins standing after a first throw where one or more pins has been knocked down creating a space between standing pins and thus a harder spare. Exmaples: 4-5, 5-6, 4-10, 6-7, 7-10, 4-6-7-10.
+- Spot Bowling
+    - A method of aiming the ball in which spots (arrows and dots) on the lane are used as targets rather than looking at the pins during the throw.
+- Strike
+    - Knocking down all 10 pins with the first effort.
+- Tap
+    - An apparent perfect hit for a strike but one pin is left standing.
+- Turkey
+    - Three consecutive strikes.
+- Three Hundred (300) Game
+    - A perfect game.
+- Top Weight
+    - Drilling of a ball so that there is more weight above the label than there is below; it is considered a positive weight.
+- Vacancy
+    - A "dummy" score used when a team does not have the same number on the team roster as do other teams. The vacancy score is set by the leagues and carries a handicap the same as if some bowler was carrying that average.
+- Vent Hole
+    - An extra hole drilled to relieve suction in the thumb hole; not gripping a hole.
+- Washout
+    - A "split" with the headpin standing; symbolized as "W"; not making the spare is considered a blow or error, not a split. For example, the 1-2-4-10 or 1-2-10 for right handed bowlers, or the 1-3-6-7 or 1-3-7 for left-handers is considered a "washout."
+- Weight Block
+    - The interior portion of a ball that adds extra weight to it to bring the overall gross weight higher. Knowledge of the locationof the weight block is used to create balls with differing positive and negative weights distributions.
