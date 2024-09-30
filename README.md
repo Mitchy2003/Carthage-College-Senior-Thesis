@@ -1,10 +1,10 @@
 # Software Requirements Specification for Bowling Web App
 ## Introduction
-- I, Mitchell Berg, am a bowler. I often find myself having issues keeping track of all of my scores, meaning I don't actually have any accurate guess as to what my average score is. This bowling app is the solution. When a Bowler bowls in a league, their average is calculated by the bowling alley's software behind the scenes, and then the score sheet is posted for all of the bowlers to see the updated scores the next time they come back to bowl in that league. Well that's just one league, what if someone is a serious tournament bowler? Tournament Bowlers often bowl at many different bowling alleys in many different locations, on many different oil patterns, and it is of the utmost importantance for them to keep track of all of their scoring because these tournaments may have large cash prizes for those who place highest. No matter what level of bowler the user is, this app will be useful for keeping scores up, and their game strong!
+- I, Mitchell Berg, am a bowler. I often find myself constantly having issues keeping track of all of my scores, meaning I don’t actually have any accurate guess as to what important statistics such as my average score, average ball speed, etc. This bowling tracking web application is the solution. When a player bowls in a league, their average is calculated by the bowling alley’s software behind the scenes, and the score sheet for the entire league is posted for everybody to see after their week of bowling. That is just for one league however, what if someone bowls in more than one league? Many bowlers across the world bowl in more than one league, so how would they keep track of their scores across multiple leagues? What about tournament bowlers? It does not matter what level of bowler a person is, this app will be useful for tracking scores, and identifying trends in bowlers' scoring to assist them in staying on top of their bowling habits.
 ## Purpose
-- The purpose of this document is to serve as a guide to designers, developers, and testers who are responsible for the engineering of the Bowling Web App project. It should give the engineers all of the information necessary to design, develop, and test the software.
+- The purpose of this documentation is to serve as a guide to myself, as a designer, developer, and tester who is responsible for the engineering of the Bowling Web Application software project. It should give me all of the information necessary to design, develop, and test the software.
 ## Scope
-- This document contains a complete descirption of the functionality of the Bowling Web App project solution. It consists of use cases, functional requirements, and non-functional requirements, which, taken together form a complete description of the software.
+- This document contains a complete description of the functionality of the Bowling Web Application project solution. It consists of Use Cases, Functional Requirements, and Non-Functional Requirements, which, taken together form a complete description of the software.
 ## System Overview
 - The Bowling Web App will be a score tracking application that allows bowlers to stay on top of their game, no matter where they are bowling, what bowling balls they are using, the way the oil is laid out onto the lane, etc. The Bowler will be able to create a bowler profile for themselves which they can log into when they first navigate to the site.
 ## Software Requirements Specification Definitions
@@ -16,31 +16,36 @@
 - Summary
     - The user may create a bowler profile to use the bowling web app, that the user can specify if it is a public profile or a private profile.
 - Rationale
-    - The user can use this bowler profile to stay on top of their bowling game by looking at statistics such as, their last game, their average score, and the score needed to maintain their average score.
+    - The user can use this bowler profile to stay on top of their bowling game by looking at statistics such as, their last game, their average score, and the score needed to maintain their average score. The choice whether they would like their profile to be shown to other users is up to them, and may be changed any time.
 - Users
     - Any user may create a bowler profile.
 - Preconditions
-    - The user must be navigated to the login page. (index.php)
+    - The user must be navigated to the login page.
 - Basic Course of Events
     - Once on the login page, the user will click on the link "Create Profile" to create a bowler profile. They will then be navigated to the signup page, where they must input an email, password, and password confirmation, once complete the user will click the "Done" button. If the password match and the email is valid, then the user will be signed up, in, and navigated to the create profile page, which will prompt the user to input information about their bowling style. The user may also create a bio for their profile to give some information about themselves.
+        - First Name
+        - Last Name
+        - Email
+        - Password (Encrypted by the software.)
+        - Home Bowling Center (Optional)
         - Average Ball Speed
         - Average RPM
-        - Which Hand used to Bowl
-        - Public or Private Profile
-        - Bio
+        - Which Hand used to Bowl (Left Handed, Right Handed, Two Handed)
+        - Public or Private Profile (This will determine if other users will be able to view their profile)
+        - Bio (Optional: General information about the user and their bowling goals/achievements.)
 - Alternative Paths
     - Email is invalid: The site will clear the textfields, and tell the user the email that was given was invalid.
-    - Password does not meet requirements: The password must be between 8 and 30 characters in length, contain at least one uppercase character, one lowercase character, and one special character. The site will clear the textfields, and tell the user the password given does not meet the requirements.
-    - Passwords do not match: The site will clear the textfields, and tell the user that the password textfields did not match.
+    - Password does not meet requirements: The password must be between 8 and 30 characters in length, contain at least one uppercase character, one lowercase character, and one special character. The site will clear the password textfields, and tell the user the password given does not meet the requirements.
+    - Passwords do not match: The site will clear the password textfields, and tell the user that the password textfields did not match.
 - Post Conditions
-    - The user will have created a bowler profile associated with the email given.
+    - The user will have created a bowler profile associated with the email given, and it will be entered into the database of profiles.
 ### UC-2: Sign into Bowler Profile
 - Summary
     - The user will be able to sign into a bowler profile, they must sign in with the associated email address and the correct password.
 - Rationale
     - The user will be able to begin a game, and keep track of their scores once signed in, or look at their past game(s).
 - Users
-    - Users who have a bowler profile in the database.
+    - Users who have a bowler profile in a database.
 - Preconditions
     - The user must have created a bowler profile to sign in, and they must be on the login page.
 - Basic Course of Events
@@ -75,7 +80,7 @@
 - Preconditions
     - The user must be signed into a bowler profile and within a game.
 - Basic Course of Events
-    - The user will click the button of the value they scored after  they throw the shot, they may add a comment about the shot, then click "Confirm" to add the score to the game.
+    - The user will click the button of the value they scored after they throw the shot, they may add a comment about the shot, then click "Confirm" to add the score to the game.
 - Alternative Paths
     - N/A
 - Post Conditions
@@ -137,7 +142,7 @@
 - Preconditions
     - The user must be signed into an existing bowler profile.
 - Basic Course of Events
-    - The user will click the Bowler Profile button, then navigated to the profile page, where there is a button to edit the Bowler Profile. The user will then be prompted with an option to update their arsenal or update their bio, once finished, the user will click "Save" and then be navigated back to the main page.
+    - The user will click the Bowler Profile button, then navigated to the profile page, where there is a button to edit the Bowler Profile. The user will then be prompted with an edit page that will allow them to edit and save changes to their profile.
 - Alternative Paths
     - N/A
 - Post Conditions
@@ -145,9 +150,9 @@
 ## Functional Requirements
 ### FR-1: Database Storage
 - Summary
-    - The software must connect to a database to record, bowler scores, and profiles.
+    - The software must have a connection to a database to record bowler scores, profiles, bowling balls, and query them.
 - Rationale
-    - Without access to a database or some sort of data storage solution, the web app will not be able to keep track of scores or bowler profiles.
+    - Without access to a database or some sort of data storage solution, the web app will not be able to keep track of scores or bowler profiles nor be able to query searches within them. The user would not be able to enter information about their bowling style, what equipment they use, and their scores, the application would be not be feasible without the database.
 - Requirements
     - The software must have a secure connection to the database.
     - The database must have a 'profiles', 'bowling balls', and 'scores' tables.
@@ -159,7 +164,7 @@
 - Rationale
     - The server is necessary to ensure secure connections to the database, and to allow multiple machines to connect at the same time.
 - Requirements
-    - The server must be operational, and able to connect to the database.
+    - The server must be operational including the use of a thread pool, and able to connect to the database.
 - References
     - UC-1, UC-2, UC-3, UC-4, UC-5, UC-6, UC-7, UC-8, FR-1
 ### FR-3: Query by Bowler Profile
@@ -168,7 +173,7 @@
 - Rationale
     - The software will be able to display accurate information to the bowler profile.
 - Requirements
-    - The software must be able to query all of the information about a single bowler profile.
+    - The software must be able to query any or all of the information about a single bowler profile.
 - References
     - UC-8
 ## Non-Functional Requirements
@@ -178,7 +183,7 @@
 - Rationale
     - The web app will look complete and the same, if the styling is also the same.
 - Requirements
-    - There must be a CSS file to standardize styling.
+    - There must be at least one CSS file to standardize styling.
 - References
     - N/A
 ## Bowling Definitions
